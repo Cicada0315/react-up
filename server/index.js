@@ -9,13 +9,12 @@ import postRoutes from './routes/posts.js';
 const app = express();
 dotenv.config();
 
-//http://localhost:5000/posts
-app.use('/posts', postRoutes);
-
 //setting up the body parser to it can send request properly
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
+//http://localhost:5000/posts
+app.use('/posts', postRoutes);
 
 //connect our server with database 
 //In here I used mongoDB https://www.mongodb.com/cloud/atlas
