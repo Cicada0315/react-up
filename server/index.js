@@ -4,8 +4,13 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv'
 
+import postRoutes from './routes/posts.js';
+
 const app = express();
 dotenv.config();
+
+//http://localhost:5000/posts
+app.use('/posts', postRoutes);
 
 //setting up the body parser to it can send request properly
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
@@ -15,7 +20,6 @@ app.use(cors());
 //connect our server with database 
 //In here I used mongoDB https://www.mongodb.com/cloud/atlas
 //Our database is hosted by mongoDB cloud.
-
 
 const CONNECTION_URL='mongodb+srv://'+process.env.USER+':'+process.env.PASSWORD+'@cluster0.filmn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
