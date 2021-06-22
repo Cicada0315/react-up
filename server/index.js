@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv'
 
-import postRoutes from './routes/posts.js';
+import posts_routes from './routes/posts_routes.js';
 
 const app = express();
 dotenv.config();
@@ -13,8 +13,9 @@ dotenv.config();
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
-//http://localhost:5000/posts
-app.use('/posts', postRoutes);
+
+//add prefix for the posts routes as http://localhost:5000/posts
+app.use('/posts', posts_routes);
 
 //connect our server with database 
 //In here I used mongoDB https://www.mongodb.com/cloud/atlas

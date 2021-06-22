@@ -6,6 +6,12 @@ import Form from './components/Form/PostForm';
 import { useDispatch } from 'react-redux';
 import { getPosts } from './actions/postsAction';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
 const App = () => {
   const dispatch=useDispatch();
 
@@ -15,9 +21,14 @@ const App = () => {
 
   return (
     <Container>
-        <NavBar />
-        <Form />
-        <Posts />
+      <NavBar />
+      <Router>
+      <Switch>
+        <Route exact path="/posts/new" component={() => <Form />} />
+        <Route exact path="/posts" component={() => <Posts />} />
+        <Route path="/" render={() => <Posts />} />
+      </Switch>
+      </Router>
     </Container>
   );
 };

@@ -11,8 +11,8 @@ const NavBar=()=>{
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-                <Nav.Link href="/posts">TopUps</Nav.Link>
-                <Nav.Link href="/posts">NewUps</Nav.Link>
+                <Nav.Link href="/posts">AllUps</Nav.Link>
+                <Nav.Link href="/posts/new">CreateUp</Nav.Link>
                 <Nav.Link href="/login"><Button className="buttons" variant="primary">Log In</Button></Nav.Link>
             </Nav>
             </Navbar.Collapse>
