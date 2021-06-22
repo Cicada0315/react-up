@@ -1,2 +1,2 @@
 # react-up
-Remade up website using react
+Remade website UP using react
