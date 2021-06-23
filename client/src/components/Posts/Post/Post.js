@@ -1,11 +1,11 @@
 import React from 'react';
-import {Card, Col, Row, Button} from 'react-bootstrap';
+import {Card, Col, Row} from 'react-bootstrap';
 import ThumbsUp from '../../../images/ThumbsUp.png'
 import View from '../../../images/view.png'
 import Edit from '../../../images/edit.png'
 import Delete from '../../../images/Delete.ico'
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../actions/postsAction'
+import { deletePost, likePost } from '../../../actions/postsAction'
 
 import {
     Link
@@ -35,7 +35,7 @@ const Post = (props) => {
                 <Row>
                     <Col>
                     <img src={View} width="30" height="30" alt="logo"/>View{views}
-                    <img src={ThumbsUp} width="30" height="30" alt="logo"/>Like{likes}
+                    <img onClick={()=>dispatch(likePost(_id))} src={ThumbsUp} width="30" height="30" alt="logo"/>Like{likes}
                     </Col>
 
                     <Col style={{textAlign: "right"}}>
