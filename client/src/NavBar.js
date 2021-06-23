@@ -3,8 +3,6 @@ import { useHistory, useLocation } from 'react-router-dom';
 import logo from './images/Logo.png';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import './NavBar.css';
-
 
 const NavBar=()=>{
     const [user, setUser]=useState(JSON.parse(localStorage.getItem('profile')));
@@ -31,9 +29,9 @@ const NavBar=()=>{
             <Nav className="me-auto">
                 <Nav.Link href="/about">AboutUps</Nav.Link>
                 <Nav.Link href="/posts">AllUps</Nav.Link>
-                {!user?(<><Nav.Link href="/auth"><Button variant="primary">Log In</Button></Nav.Link></>):
+                {!user?(<><Nav.Link href="/auth"><Button variant="primary">Sign In</Button></Nav.Link></>):
                     (<><Nav.Link href="/posts/new">CreateUp</Nav.Link>
-                    <Button onClick={logout} variant="primary">Log Out</Button></>)
+                    <Button onClick={logout} variant="primary">Sign Out</Button></>)
                 }
             </Nav>
             </Navbar.Collapse>

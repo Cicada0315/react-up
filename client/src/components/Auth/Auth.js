@@ -3,9 +3,11 @@ import { Form, Button, Card } from 'react-bootstrap';
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { signin, signup } from '../../actions/authAction'
 
 const Auth = () => {
     const [isSignup, setSignup]=useState(false);
+    const [inputs, setInputs]=useState({ firstname: '', lastname: '', email: '', password: '', cpassword: '' });
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -14,14 +16,21 @@ const Auth = () => {
     };
 
     const handleonChange = (e) => {
-        this.setState({
+        setInputs({
+          ...inputs,
           [e.target.name]: e.target.value
         });
     };
 
     const handleSubmit=(e)=>{
-
-    }
+        e.preventDefault();
+        console.log(inputs);
+        if(isSignup){
+            dispatch(signup(inputs, history));
+        }else{
+            dispatch(signin(inputs, history));
+        }
+    };
 
     const googleSuccess = async (res) => {
         const result = res.profileObj;
@@ -35,7 +44,7 @@ const Auth = () => {
         }
     };
     
-    const googleError = () => alert('Google Sign In was unsuccessful. Try again.');
+    const googleError = () => alert('Google Sign In failed. Try again.');
 
     return (
         <Card className="center">
@@ -46,30 +55,30 @@ const Auth = () => {
                         <>
                         <Form.Group controlId="firstname">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text" name="firstname"  onChange={handleonChange} />
+                        <Form.Control type="text" name="firstname" value={inputs.firstname} onChange={handleonChange} />
                         </Form.Group>
 
                         <Form.Group controlId="lastname">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text" name="lastname" onChange={handleonChange} />
+                        <Form.Control type="text" name="lastname" value={inputs.lastname} onChange={handleonChange} />
                         </Form.Group>
                         </>
                     )}
                     <Form.Group controlId="username">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" name="username" onChange={handleonChange} />
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" name="email" value={inputs.email} onChange={handleonChange} />
                     </Form.Group>
 
                     <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name="password" onChange={handleonChange} />
+                    <Form.Control type="password" name="password" value={inputs.password} onChange={handleonChange} />
                     </Form.Group>
 
                     {isSignup && (
                         <>
                         <Form.Group controlId="cpassword">
                         <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control type="password" name="password" onChange={handleonChange} />
+                        <Form.Control type="password" name="cpassword" value={inputs.cpassword} onChange={handleonChange} />
                         </Form.Group>
                         </>
                     )}
