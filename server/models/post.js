@@ -10,8 +10,8 @@ const postSchema = mongoose.Schema({
         default: 0,
     },
     likes: {
-        type: Number,
-        default: 0,
+        type: [String],
+        default: [],
     },
     createdAt: {
         type: Date,

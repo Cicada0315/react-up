@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 
 import posts_routes from './routes/posts_routes.js';
+import user_routes from './routes/user_routes.js';
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 
 //add prefix for the posts routes as http://localhost:5000/posts
 app.use('/posts', posts_routes);
+app.use('/user', user_routes);
 
 app.get('/', (req, res)=>{
   res.send('Welcome to Up API');
