@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from './components/NavBar';
+import NavBar from './NavBar';
 import Footer from './components/Footer';
 import About from './components/About';
 import { Container } from 'react-bootstrap';
@@ -12,6 +12,7 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
+import Auth from './components/Auth/Auth';
 
 const App = () => {
     const [currentPostId, setCurrentPostId] = useState(null);
@@ -23,14 +24,15 @@ const App = () => {
 
     return (
         <Container>
-          <NavBar />
           <Router>
+          <NavBar />
           <Switch>
+              <Route path="/auth" exact component={Auth}/>
               <Route exact path="/posts/new" component={(routeinfo) => <Form routeinfo={routeinfo} currentPostId={currentPostId} setCurrentPostId={setCurrentPostId} />} />
-              <Route exact path="/posts/edit" component={() => <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
-              <Route exact path="/posts" component={() => <Posts setCurrentPostId={setCurrentPostId}/>} />
+              <Route exact path="/posts/:currentPostId/edit" component={() => <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
+              <Route exact path="/posts" component={() => <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
               <Route path="/about" component={() => <About />} />
-              <Route path="/" render={() => <Posts setCurrentPostId={setCurrentPostId}/>} />}
+              <Route path="/" render={() => <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />}
           </Switch>
           </Router>
           <Footer />

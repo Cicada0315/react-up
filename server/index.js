@@ -17,6 +17,10 @@ app.use(cors());
 //add prefix for the posts routes as http://localhost:5000/posts
 app.use('/posts', posts_routes);
 
+app.get('/', (req, res)=>{
+  res.send('Welcome to Up API');
+});
+
 //connect our server with database 
 //In here I used mongoDB https://www.mongodb.com/cloud/atlas
 //Our database is hosted by mongoDB cloud.

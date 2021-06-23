@@ -34,12 +34,12 @@ const Post = (props) => {
             <Card.Footer>
                 <Row>
                     <Col>
-                    <img src={View} width="30" height="30" alt="logo"/>View{views}
-                    <img onClick={()=>dispatch(likePost(_id))} src={ThumbsUp} width="30" height="30" alt="logo"/>Like{likes}
+                    <img src={View} width="30" height="30" alt="logo"/>&nbsp;View&nbsp;{views}&nbsp;
+                    <img onClick={()=>dispatch(likePost(_id))} src={ThumbsUp} width="30" height="30" alt="logo"/>&nbsp;Like&nbsp;{likes}
                     </Col>
 
                     <Col style={{textAlign: "right"}}>
-                    <Link to="/posts/edit" onClick={()=> props.setCurrentPostId(_id)} ><img src={Edit} width="30" height="30" alt="logo"/>Edit</Link>
+                    <Link to={`/posts/${_id}/edit`} onClick={()=> props.setCurrentPostId(_id)} ><img src={Edit} width="30" height="30" alt="logo"/>Edit</Link>
                     <img onClick={()=>dispatch(deletePost(_id))} src={Delete} width="30" height="30" alt="logo"/>Delete
                     </Col>
                 </Row>

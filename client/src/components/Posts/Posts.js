@@ -11,7 +11,7 @@ const Posts = (props) => {
             <span className="sr-only">Loading...</span>
         </Spinner>:
         <div>
-            {posts.map(p=><Post key={p._id} post={p} setCurrentPostId={props.setCurrentPostId}/>)}
+            {posts.map(p=><Post key={p._id} post={p} currentPostId={props.currentPostId} setCurrentPostId={props.setCurrentPostId}/>)}
         </div>
     );
 };

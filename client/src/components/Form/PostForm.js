@@ -3,9 +3,11 @@ import { Form, Button, Card } from 'react-bootstrap';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/postsAction'
+import { useHistory } from 'react-router-dom';
 
 const PostForm = (props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [postinfo, setPostinfo] = useState({ creator: '', title: '', content: '', files: '' });
     const post = useSelector((state) => (props.currentPostId ? state.posts.find((p) => p._id === props.currentPostId) : null));
 
@@ -29,8 +31,7 @@ const PostForm = (props) => {
         }else{
             dispatch(createPost(postinfo));
         }
-        //change route to the home
-        props.routeinfo.history.push("/")
+        history.push('/');
         clear();
     }
 
