@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import FileBase from 'react-file-base64';
-import { useDispatch } from 'react-redux';
-import { createPost } from '../../actions/postsAction'
+import { useDispatch, useSelector } from 'react-redux';
+import { createPost, updatePost } from '../../actions/postsAction'
 
-const PostForm = () => {
+const PostForm = (props) => {
     const dispatch = useDispatch();
     const [postinfo, setPostinfo] = useState({ creator: '', title: '', content: '', files: '' });
+    const post = useSelector((state) => (props.currentPostId ? state.posts.find((p) => p._id === props.currentPostId) : null));
+
+    useEffect(()=>{
+        if(post){
+            setPostinfo(post);
+        }
+    }, [post])
 
     const handleonChange = (e) => {
         setPostinfo({
@@ -17,7 +24,14 @@ const PostForm = () => {
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        dispatch(createPost(postinfo));
+        if(props.currentPostId){
+            dispatch(updatePost(props.currentPostId, postinfo));
+        }else{
+            dispatch(createPost(postinfo));
+        }
+        //change route to the home
+        props.routeinfo.history.push("/")
+        clear();
     }
 
     const clear=()=>{
@@ -28,7 +42,7 @@ const PostForm = () => {
 
     return (
         <Card className="center">
-            <h1 className="text-center">Create Post</h1>
+            {!post?<h1 className="text-center">Create Post</h1>: <h1 className="text-center">Edit Post</h1>}
             <div className="login-form">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="creator">
@@ -49,9 +63,7 @@ const PostForm = () => {
                     <Form.Group controlId="content">
                     <FileBase type="file" multiple={false} onDone={({ base64 }) => setPostinfo({ ...postinfo, files: base64 })} />
                     </Form.Group>
-
-                    <Button variant="primary" type="submit">CreatePost</Button>
-                    <Button variant="primary" onClick={clear}>Clear</Button>
+                    {!post?<Button variant="primary" type="submit">CreatePost</Button>: <Button variant="primary" type="submit">EditPost</Button>}                    
                 </Form>
             </div>
         </Card>
