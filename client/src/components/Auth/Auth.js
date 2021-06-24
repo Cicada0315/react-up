@@ -90,8 +90,8 @@ const Auth = () => {
                         onFailure={googleFails}
                         cookiePolicy="single_host_origin"
                     />
-
-                    <Button variant="primary" onClick={swichMode}>{isSignup ? 'Already have an account? Sign In': "Don't have account? Sign up"}</Button><br/>
+                    <br/>
+                    <p variant="primary" onClick={swichMode}>{isSignup ? 'Already have an account? Sign In': "Don't have account? Sign up"}</p><br/>
                 </Form>
             </div>
         </Card>
