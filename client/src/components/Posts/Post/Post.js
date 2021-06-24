@@ -1,7 +1,6 @@
 import React from 'react';
 import {Card, Col, Row, Button} from 'react-bootstrap';
 import ThumbsUp from '../../../images/ThumbsUp.png'
-import View from '../../../images/view.png'
 import Edit from '../../../images/edit.png'
 import Delete from '../../../images/Delete.ico'
 import { useDispatch } from 'react-redux';
@@ -11,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const Post = (props) => {
     const dispatch=useDispatch();
-    const { title, content, creator, name, files, likes, views, _id } =props.post
+    const { title, content, creator, name, files, likes, _id } =props.post
     const user= JSON.parse(localStorage.getItem('userinfo'))
     return (
         <Card>

@@ -10,7 +10,6 @@ const NavBar=()=>{
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
-
     const logout=(e)=>{
         dispatch({type: 'LOGOUT'});
         history.push('/auth');
@@ -21,15 +20,16 @@ const NavBar=()=>{
         if(user){
             if(user.token){
                 const decodedToken = decode(user.token);
-                if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+                if (decodedToken.exp * 1000 < new Date().getTime()){
+                    logout();
+                } 
             }
         }
         setUser(JSON.parse(localStorage.getItem('userinfo')));
     }, [location]);
-    
+
     return(
         <Navbar bg="light" expand="lg">
-        <Container>
             <Navbar.Brand href="/"><img src={logo} width="30" height="30" alt="logo"/> UP</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -42,7 +42,6 @@ const NavBar=()=>{
                 }
             </Nav>
             </Navbar.Collapse>
-        </Container>
         </Navbar>
     )
 }

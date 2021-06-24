@@ -32,6 +32,7 @@ const Auth = () => {
     };
 
     const googleSuccess = async (res) => {
+        //console.log(res);
         const result = res.profileObj;
         const token = res.tokenId;
     
@@ -43,7 +44,7 @@ const Auth = () => {
         }
     };
     
-    const googleError = () => alert('Google Sign In failed. Try again.');
+    const googleFails = () => alert('Google Sign In failed. Try again.');
 
     return (
         <Card className="center">
@@ -85,13 +86,8 @@ const Auth = () => {
                     <Button variant="primary" type="submit">{isSignup ? 'Sign up': 'Sign In'}</Button><br/>
                     <GoogleLogin
                         clientId="715145258523-tgonv2p9tfca6flh3uf7isf1rtbb527o.apps.googleusercontent.com"
-                        render={(renderProps) => (
-                        <Button variant="primary" onClick={renderProps.onClick} disabled={renderProps.disabled} variant="contained">
-                            Google Sign In
-                        </Button>
-                        )}
                         onSuccess={googleSuccess}
-                        onFailure={googleError}
+                        onFailure={googleFails}
                         cookiePolicy="single_host_origin"
                     />
 

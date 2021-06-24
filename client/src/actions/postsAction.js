@@ -3,7 +3,6 @@ import * as api from '../api/index.js';
 export const getPosts = () => async (dispatch) => {
     try {
         const res = await api.fetchPosts();
-        console.log(res)
         dispatch({ type: 'FETCH_POSTS', payload: res.data });
     } catch (error) {
         console.log(error);
