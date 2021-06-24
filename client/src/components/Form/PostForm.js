@@ -42,14 +42,13 @@ const PostForm = (props) => {
         })
     }
 
-    if(!user.result.name){
+    if(!user){
         return(
             <div>
-                Plase sign in to create new post
+                {history.push('/auth')};
             </div>
         )
     }
-
     return (
         <Card className="center">
             {!post?<h1 className="text-center">Create Post</h1>: <h1 className="text-center">Edit Post</h1>}

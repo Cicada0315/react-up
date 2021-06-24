@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import logo from './images/Logo.png';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
 
 const NavBar=()=>{
     const [user, setUser]=useState(JSON.parse(localStorage.getItem('userinfo')));
@@ -17,6 +18,12 @@ const NavBar=()=>{
     }
 
     useEffect(() => {
+        if(user){
+            if(user.token){
+                const decodedToken = decode(user.token);
+                if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+            }
+        }
         setUser(JSON.parse(localStorage.getItem('userinfo')));
     }, [location]);
     
