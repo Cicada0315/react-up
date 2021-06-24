@@ -8,8 +8,9 @@ import { useHistory } from 'react-router-dom';
 const PostForm = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [postinfo, setPostinfo] = useState({ creator: '', title: '', content: '', files: '' });
+    const [postinfo, setPostinfo] = useState({ title: '', content: '', files: '' });
     const post = useSelector((state) => (props.currentPostId ? state.posts.find((p) => p._id === props.currentPostId) : null));
+    const user= JSON.parse(localStorage.getItem('userinfo'))
 
     useEffect(()=>{
         if(post){
@@ -27,9 +28,9 @@ const PostForm = (props) => {
     const handleSubmit=(e)=>{
         e.preventDefault();
         if(props.currentPostId){
-            dispatch(updatePost(props.currentPostId, postinfo));
+            dispatch(updatePost(props.currentPostId, {...postinfo, name: user.result.name}));
         }else{
-            dispatch(createPost(postinfo));
+            dispatch(createPost({...postinfo, name: user.result.name}));
         }
         history.push('/');
         clear();
@@ -37,8 +38,16 @@ const PostForm = (props) => {
 
     const clear=()=>{
         setPostinfo({
-            creator: '', title: '', content: '', files: '' 
+            title: '', content: '', files: '' 
         })
+    }
+
+    if(!user.result.name){
+        return(
+            <div>
+                Plase sign in to create new post
+            </div>
+        )
     }
 
     return (
@@ -46,11 +55,6 @@ const PostForm = (props) => {
             {!post?<h1 className="text-center">Create Post</h1>: <h1 className="text-center">Edit Post</h1>}
             <div className="login-form">
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="creator">
-                    <Form.Label>creator</Form.Label>
-                    <Form.Control type="text" name="creator" value={postinfo.creator} onChange={handleonChange} />
-                    </Form.Group>
-
                     <Form.Group controlId="title">
                     <Form.Label>Title</Form.Label>
                     <Form.Control type="text" name="title" value={postinfo.title} onChange={handleonChange} />

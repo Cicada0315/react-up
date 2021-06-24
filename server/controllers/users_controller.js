@@ -6,7 +6,7 @@ import User from "../models/user.js";
 export const signin = async (req, res) => {
     const { email, password } = req.body;
     try {
-        const existUser = await UserModal.findOne({ email });
+        const existUser = await User.findOne({ email });
         if (!existUser) {
             return res.status(404).json({ message: "User doesn't exist" });
         }
@@ -25,7 +25,7 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-    const { email, password, cpassword ,firstName, lastName } = req.body;
+    const { email, password, cpassword ,firstname, lastname } = req.body;
   
     try {
         const existUser = await User.findOne({ email });
@@ -37,8 +37,8 @@ export const signup = async (req, res) => {
         }
     
         const hashedPassword = await bcrypt.hash(password, 12);
-        const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
-        const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
+        const result = await User.create({ email, password: hashedPassword, name: `${firstname} ${lastname}` });
+        const token = jwt.sign( { email: result.email, id: result._id }, process.env.SECRET, { expiresIn: "1h" } );
     
         res.status(201).json({ result, token });
     } catch (error) {

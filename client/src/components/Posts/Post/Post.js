@@ -13,7 +13,7 @@ import {
 
 const Post = (props) => {
     const dispatch=useDispatch();
-    const { title, content, creator, files, likes, views, _id } =props.post
+    const { title, content, name, files, likes, views, _id } =props.post
     return (
         <Card>
             <Row>
@@ -23,7 +23,8 @@ const Post = (props) => {
 
                 <Col>
                     <Card.Body>
-                        <Card.Title>{title}-{creator}</Card.Title>
+                        <Card.Title>{title}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">by. {name}</Card.Subtitle>
                         <Card.Text>
                         {content}
                         </Card.Text>
@@ -35,7 +36,7 @@ const Post = (props) => {
                 <Row>
                     <Col>
                     <img src={View} width="30" height="30" alt="logo"/>&nbsp;View&nbsp;{views}&nbsp;
-                    <img onClick={()=>dispatch(likePost(_id))} src={ThumbsUp} width="30" height="30" alt="logo"/>&nbsp;Like&nbsp;{likes}
+                    <img onClick={()=>dispatch(likePost(_id))} src={ThumbsUp} width="30" height="30" alt="logo"/>&nbsp;Like&nbsp;{likes.length}
                     </Col>
 
                     <Col style={{textAlign: "right"}}>

@@ -5,7 +5,7 @@ import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 const NavBar=()=>{
-    const [user, setUser]=useState(JSON.parse(localStorage.getItem('profile')));
+    const [user, setUser]=useState(JSON.parse(localStorage.getItem('userinfo')));
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
@@ -17,7 +17,7 @@ const NavBar=()=>{
     }
 
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('profile')));
+        setUser(JSON.parse(localStorage.getItem('userinfo')));
     }, [location]);
     
     return(
